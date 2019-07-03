@@ -26,7 +26,7 @@ namespace SeleniumFirst
             //Console.WriteLine("executeautomation");
         }
 
-        [SetUp] //tato metoda je zavolána okamžite, poté co zvlolíme runtest
+        [SetUp] //tato metoda je zavolána okamžite, poté co zvlolíme runtes
         public void Initialize()
         {
             driver.Navigate().GoToUrl("http://executeautomation.com/demosite/index.html?UserName=a&Password=a&Login=Login ");
