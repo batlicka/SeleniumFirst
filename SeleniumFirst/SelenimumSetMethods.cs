@@ -9,35 +9,27 @@ using OpenQA.Selenium.Support.UI;
 namespace SeleniumFirst
 {
     //custom methods
-    class SelenimumSetMethods
+    public static class SelenimumSetMethods
     {
         //zde budou definovány všechny akce, které chceme provádět na stránce
 
-        //Enter text                 // instance web drv, identifikator, zadavana hodnota, typ prvku name/id       
-        public static void EnterText(IWebDriver driver, string element, string value, string elementtype)
+        //Enter text                 
+        //this -> makes extended method for entering text in the control
+        public static void EnterText( this IWebElement element, string value )
         {
-            if(elementtype== "Id")
-                driver.FindElement(By.Id(element)).SendKeys(value);
-            if (elementtype == "Name")           
-                driver.FindElement(By.Name(element)).SendKeys(value);
+            element.SendKeys(value);
         }
 
         //click into a button, chceckbox
-        public static void Click(IWebDriver driver, string element, string elementtype)
+        public static void Clicks(this IWebElement element)
         {
-            if (elementtype == "Id")
-                driver.FindElement(By.Id(element)).Click();
-            if(elementtype == "Name")
-                driver.FindElement(By.Name(element)).Click();
+            element.Click();
         }
 
         //selecting drop down control
-        public static void SelectDropDown(IWebDriver driver, string element, string value, string elementtype)
+        public static void SelectDropDown(this IWebElement element, string value)
         {
-            if (elementtype == "Id")
-                new SelectElement(driver.FindElement(By.Id(element))).SelectByText(value);
-            if (elementtype == "Name")
-                new SelectElement(driver.FindElement(By.Name(element))).SelectByText(value);
+            new SelectElement(element).SelectByText(value);
         }
     }
 }

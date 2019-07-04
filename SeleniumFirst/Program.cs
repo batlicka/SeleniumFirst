@@ -12,7 +12,7 @@ namespace SeleniumFirst
     class Program
     {
 
-        IWebDriver driver = new ChromeDriver();
+       
         static void Main(string[] args)
         {
             //IWebDriver driver = new ChromeDriver();
@@ -29,24 +29,30 @@ namespace SeleniumFirst
         [SetUp] //tato metoda je zavolána okamžite, poté co zvlolíme runtes
         public void Initialize()
         {
-            driver.Navigate().GoToUrl("http://executeautomation.com/demosite/index.html?UserName=a&Password=a&Login=Login ");
+            PropertiesCollection.driver = new ChromeDriver();
+            PropertiesCollection.driver.Navigate().GoToUrl("http://executeautomation.com/demosite/Login.html");
             Console.WriteLine("opened url");
         }
 
         [Test]
         public void ExecuteTest()
         {
-            //Title
-            SelenimumSetMethods.SelectDropDown(driver, "TitleId", "Mr.", "Id");
+            //ExcelLib.PopulateInCollection(@"c:\Users\vagunda\Documents\testDataDrivenSelen.xlsx");
+            
+            //login to application
+            LoginPageObject pageLogin = new LoginPageObject();
 
-            //Initial
-            SelenimumSetMethods.EnterText(driver, "Initial", "executeautomation", "Id");
+            //inputs bez excell file
+            EAPageObject pageEA = pageLogin.Login("execute", "automation");
+            pageEA.FillUserForm("KK", "Kartik", "Automation");
 
-            Console.WriteLine("the value from my title is:" + SeleniumGetMethod.GetTextFromDropDown(driver, "TitleId", "Id"));
+            //inputs from excel file
+            //EAPageObject pageEA = pageLogin.Login(ExcelLib.ReadData(1, "UserName"), ExcelLib.ReadData(1, "Password"));
+            //pageEA.FillUserForm(ExcelLib.ReadData(1, "Initial"), ExcelLib.ReadData(1, "MiddleName"), ExcelLib.ReadData(1, "FirstName"));
 
-            Console.WriteLine("the value from my title is:" + SeleniumGetMethod.GetText(driver, "Initial", "Name"));
-            //Click
-            SelenimumSetMethods.Click(driver, "Save", "Name");
+            //Initialize page
+            //EAPageObject pageEA = new EAPageObject();
+
         }
 
         [Test]
@@ -58,8 +64,10 @@ namespace SeleniumFirst
         [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            PropertiesCollection.driver.Close();
             Console.WriteLine("close test");
         }
     }
 }
+//Data Driven Testing with excel  - download "ExcelDataReader"
+//http://executeautomation.com/blog/?s=LINQ
