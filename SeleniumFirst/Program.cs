@@ -37,8 +37,8 @@ namespace SeleniumFirst
         [Test]
         public void ExecuteTest()
         {
-            //ExcelLib.PopulateInCollection(@"c:\Users\vagunda\Documents\testDataDrivenSelen.xlsx");
-            
+            ExcelLib.PopulateInCollection(@"c:\Users\vagunda\Documents\testDataDrivenSelen.xlsx");
+
             //login to application
             LoginPageObject pageLogin = new LoginPageObject();
 

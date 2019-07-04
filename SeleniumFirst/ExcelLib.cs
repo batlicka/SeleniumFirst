@@ -7,6 +7,7 @@ using System.Linq;
 
 
 
+
 namespace SeleniumFirst
 {
     class ExcelLib
@@ -20,11 +21,14 @@ namespace SeleniumFirst
             //Return as DataSet
             DataSet result = excelReader.AsDataSet(new ExcelDataSetConfiguration()
             {
+                //use first row for headers of columns data are saved to 1st row
                 ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
                 {
                     UseHeaderRow = true
                 }
-            });                        
+            });
+            //version 2
+            //DataSet result = excelReader.AsDataSet();
             //Get all the Tables
             DataTableCollection table = result.Tables;
             //Store it in DataTable
